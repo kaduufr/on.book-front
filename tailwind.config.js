@@ -9,8 +9,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
         primary: '#8C6A5E',
@@ -19,8 +18,9 @@ module.exports = {
         blueLight: '#C2E0F2',
         brownLight: '#f2e5d0',
         grayIce: '#fffdfc',
-      }
+        blueDark: '#42708C',
+      },
     },
   },
-  plugins: [],
+  plugins: [require('daisyui')],
 }

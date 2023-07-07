@@ -1,12 +1,13 @@
-import { Html} from "next/document";
-import { Inter } from 'next/font/google'
-const inter = Inter({ subsets: ['latin'] })
+import { Head, Html, Main, NextScript } from 'next/document'
 
 const Document = ({ children }) => (
-  <Html lang="pt">
-
-    <body className={inter.className}>
-      {children}
+  <Html lang="pt" data-theme="light">
+    <Head>
+      <meta charSet="utf-8" />
+    </Head>
+    <body>
+      <Main>{children}</Main>
+      <NextScript />
     </body>
   </Html>
 )
