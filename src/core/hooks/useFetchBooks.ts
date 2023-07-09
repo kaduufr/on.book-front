@@ -1,12 +1,12 @@
-import IBook from "@interfaces/IBook";
-import {useEffect, useState} from "react";
-import BookService from "@services/BookService";
-import {AxiosError} from "axios";
+import { useEffect, useState } from 'react'
+import BookService from '@services/BookService'
+import { AxiosError } from 'axios'
+import { IBookGroup } from '@factories/BooksFactory'
 
 export function useFetchBooks() {
-  const [books, setBooks] = useState<IBook[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>(null);
+  const [books, setBooks] = useState<IBookGroup[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string>(null)
 
   useEffect(() => {
     function fetchBooks() {
@@ -17,9 +17,8 @@ export function useFetchBooks() {
         .finally(() => setIsLoading(false))
     }
 
-    fetchBooks();
-  }, []);
+    fetchBooks()
+  }, [])
 
-  return { books, isLoading, error };
+  return { books, isLoading, error }
 }
-

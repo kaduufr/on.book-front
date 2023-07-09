@@ -8,4 +8,6 @@ export default interface IBook {
   quantity: number
   image_url: string
   available: string
+  category_id: number
+  category_name: string
 }

@@ -6,7 +6,7 @@ const RegisterScreen = () => {
   return (
     <div
       className="relative flex justify-center items-center w-full min-h-screen !bg-cover !bg-fixed !bg-center"
-      style={{ background: "url('/assets/bg-login-book.avif')" }}
+      style={{ background: "url('/assets/bg-login-livros.avif')" }}
     >
       <div className="w-[500px] min-h-[420px] h-auto rounded-2xl bg-brownLight flex flex-col items-center justify-center py-4 gap-y-3">
         <h1 className="text-primary text-3xl font-bold ">On.Book</h1>

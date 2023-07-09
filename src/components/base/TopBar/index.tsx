@@ -28,9 +28,9 @@ const TopBar = () => {
         <div className="ml-auto mr-10">
           <Link
             href={routes.login}
-            className="bg-primary text-white rounded-full flex flex-row items-center px-4 py-2"
+            className="bg-primary text-white rounded-full flex flex-row items-center px-4 py-2 hover:opacity-95 transition-all"
           >
-            <p>Entrar</p>
+            <p>Acesse o sistema</p>
             <SignInIcon className="ml-2 rotate-180" color="#fff" size={22} />
           </Link>
         </div>
