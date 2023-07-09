@@ -36,7 +36,19 @@ export default class ShowBooksFactory {
   static builder(data: DataFromApi): IShowBooksFactory {
     const booked: IBook[] = []
 
-    data.data.forEach((book) => {
+    if (data.data.length === 0) {
+      return {
+        category_id: 0,
+        category_name: '',
+        books: [],
+        _meta: {
+          total: 0,
+          limit: 0,
+          offset: 0,
+        },
+      }
+    }
+    data?.data?.forEach((book) => {
       const bookFormated = {
         id: book.id,
         title: book.title,

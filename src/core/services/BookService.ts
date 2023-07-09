@@ -12,4 +12,10 @@ export default class BookService {
       ShowBooksFactory.builder(response.data)
     )
   }
+
+  static getBook = (id: number): Promise<IBookGroup[]> => {
+    return OnBookApi.get(`/books/${id}`).then((response) => {
+      return BooksFactory.builder(response.data)
+    })
+  }
 }

@@ -2,7 +2,7 @@ const routes = {
   home: '/',
   login: '/login',
   register: '/cadastro',
-  showBooks: '/livros/',
+  books: '/livros',
   showCategories: '/categorias',
   showBooksByCategories: '/livros/categorias',
 }

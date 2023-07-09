@@ -12,6 +12,7 @@ type DataFromApi = {
   available: boolean
   category_id: number
   category_name: string
+  published_at?: string
 }
 
 export interface IBookGroup {
@@ -46,6 +47,7 @@ export default class BooksFactory {
           description: book.description,
           quantity: book.quantity,
           section: book.section,
+          published_at: book?.published_at ?? '',
           category_id: book.category_id,
           category_name: book.category_name,
         })

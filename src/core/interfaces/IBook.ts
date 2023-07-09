@@ -10,4 +10,5 @@ export default interface IBook {
   available: string
   category_id: number
   category_name: string
+  published_at?: string
 }

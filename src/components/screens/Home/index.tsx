@@ -15,7 +15,7 @@ export default function Home() {
           <div key={index} className="w-1/2 relative">
             <div className="flex flex-row items-center">
               <h2 className="text-2xl">{group.category_name}</h2>
-              <Link href={`/${routes.showBooksByCategories}/${group.category_id}`}>
+              <Link href={`${routes.showBooksByCategories}/${group.category_id}`}>
                 <button className="flex flex-row items-center px-4 mt-2 underline text-blueDark">
                   <span className="text-sm">Ver todos</span>
                   <ChevronRightIcon />
@@ -33,7 +33,9 @@ export default function Home() {
                       alt={'book_image'}
                       className="h-[230px] w-[160px] object-cover"
                     />
-                    <p className="font-normal text-center">{book.title}</p>
+                    <p className="font-normal text-center max-w-[160px] break-words">
+                      {book.title}
+                    </p>
                     <small className="font-thin">{book.available}</small>
                   </div>
                 </div>
