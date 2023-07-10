@@ -6,9 +6,22 @@ export type FormLoginType = {
   password: string
 }
 
+export type FormRegisterType = {
+  email: string
+  password: string
+  name: string
+  document: string
+}
+
 export default class UserService {
   static login(data: FormLoginType): Promise<ILoginFactory> {
     return OnBookApi.post('/users/login', {
+      user: data,
+    }).then((response) => LoginFactory.builder(response.data))
+  }
+
+  static register(data: FormRegisterType): Promise<ILoginFactory> {
+    return OnBookApi.post('/users/signup', {
       user: data,
     }).then((response) => LoginFactory.builder(response.data))
   }

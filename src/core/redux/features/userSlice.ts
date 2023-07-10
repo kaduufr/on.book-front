@@ -21,10 +21,13 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state: Draft<IUser>, action: PayloadAction<IUser>) => {
       Object.assign(state, action.payload)
+    },
+    logoff: (state: Draft<IUser>) => {
+      Object.assign(state, initialState)
     }
   },
 })
 
-export const { setUser } = userSlice.actions
+export const { setUser, logoff } = userSlice.actions
 
 export default userSlice

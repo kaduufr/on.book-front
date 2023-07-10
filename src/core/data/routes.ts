@@ -5,6 +5,7 @@ const routes = {
   books: '/livros',
   showCategories: '/categorias',
   showBooksByCategories: '/livros/categorias',
+  profile: '/user/perfil',
 }
 
 export default routes

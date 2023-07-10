@@ -5,7 +5,14 @@ import Link from 'next/link'
 import routes from '@data/routes'
 
 const TopBar = () => {
-  const { isLogged } = useUserLogged()
+  const { isLogged,name } = useUserLogged()
+  const [firstname, surname,] = name.split(' ')
+  let siglas = 'NN'
+
+  if (firstname && surname) {
+    siglas = firstname[0] + surname[0]
+  }
+
   return (
     <div className="w-full min-h-[80px] items-center flex flex-row">
       <div className="ml-auto relative">
@@ -17,10 +24,10 @@ const TopBar = () => {
       </div>
       {isLogged && (
         <div className="ml-auto flex items-center flex-row mr-10">
-          <div className="flex items-center justify-center bg-primary m-auto w-[48px] h-[48px] rounded-full mr-2 text-grayIce">
-            CE
+          <div className="flex items-center justify-center bg-primary m-auto w-[42px] h-[42px] rounded-full mr-2 text-grayIce">
+            {siglas || 'NN'}
           </div>
-          <p className="text-xl text-primary">Carlos Eduardo</p>
+          <p className="text-xl text-primary">{name}</p>
         </div>
       )}
 

@@ -22,6 +22,26 @@ export default class UserProvider {
     }
   }
 
+  static async register(data: FormLoginType) {
+    try {
+      const response = await UserService.register(data)
+
+      const cookieUser: SetCookieType = {
+        cookieName: COOKIE_APP,
+        value: response.token,
+        ctx: null,
+      }
+
+      CookieProvider.setCookie(cookieUser)
+
+      return 'Cadastro com sucesso'
+
+    } catch (error) {
+      console.log(error)
+      throw new Error(error)
+    }
+  }
+
   static logout() {
     CookieProvider.destroyCookie({ cookieName: COOKIE_APP, ctx: null })
   }

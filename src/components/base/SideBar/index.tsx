@@ -1,13 +1,23 @@
-import { memo } from 'react'
+import { memo, MouseEvent } from 'react'
 import { BookmarkIcon, ChevronRightIcon, HalfBookIcon } from '@shared/icons'
 import useFetchCategories from '@hooks/useFetchCategories'
 import Link from 'next/link'
 import routes from '@data/routes'
 import useUserLogged from '@hooks/useUserLogged'
+import {useRouter} from "next/router";
+import UserProvider from "@providers/UserProvider";
 
 const SideBar = () => {
   const { categories } = useFetchCategories()
-  const { isLogged } = useUserLogged()
+  const { isLogged, logoff } = useUserLogged()
+  const {push} = useRouter()
+
+  function handleLogout(evt: MouseEvent) {
+    evt.preventDefault()
+    UserProvider.logout()
+    push(routes.home)
+    logoff()
+  }
 
   return (
     <div className="flex flex-col w-[260px] pt-6  gap-y-5">
@@ -44,10 +54,18 @@ const SideBar = () => {
           </div>
         </div>
         {isLogged && (
-          <button className="flex justify-start items-center flex-row gap-x-2 mt-auto mb-[60%]">
-            <BookmarkIcon />
-            <p>Sair</p>
-          </button>
+          <div className="mt-auto mb-[60%] flex flex-col gap-y-3">
+            <Link href={routes.profile}>
+              <button className="flex justify-start items-center flex-row gap-x-2 hover:underline hover:font-bold hover:text-[16px] transition-all">
+                <BookmarkIcon />
+                <p>Meus Perfil</p>
+              </button>
+            </Link>
+            <button className="flex justify-start items-center flex-row gap-x-2 " onClick={handleLogout}>
+              <BookmarkIcon />
+              <p>Sair</p>
+            </button>
+          </div>
         )}
       </div>
     </div>

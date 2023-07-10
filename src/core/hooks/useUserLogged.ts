@@ -6,11 +6,9 @@ import { useRouter } from 'next/router'
 import UserProvider from '@providers/UserProvider'
 import routes from '@data/routes'
 import { decodeToken } from '@helpers/decodeToken'
-import { setUser } from '@features/userSlice'
+import {logoff, setUser} from '@features/userSlice'
 import { RootState } from '@redux/store'
 import { createSelector } from '@reduxjs/toolkit'
-
-interface IUserLogged {}
 
 const selectUserLogged = (state: RootState) => state.user
 const userSelector = createSelector(selectUserLogged, (user) => user)
@@ -30,6 +28,7 @@ export default function useUserLogged() {
       push(routes.login).then(() => {
         setIsLogged(false)
       })
+      return
     }
 
     if (name && type) {
@@ -51,5 +50,7 @@ export default function useUserLogged() {
 
   return {
     isLogged,
+    name,
+    logoff: () => dispatch(logoff())
   }
 }
