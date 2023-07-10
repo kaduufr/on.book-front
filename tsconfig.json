@@ -39,6 +39,7 @@
       "@assets/*": ["./src/assets/*"],
       "@styles/*": ["./src/core/styles/*"],
       "@pages/*": ["./src/core/pages/*"],
+      "@features/*": ["./src/core/redux/features/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

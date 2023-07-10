@@ -15,16 +15,16 @@ const TopBar = () => {
           placeholder="Digite aqui o titulo para pesquisar..."
         />
       </div>
-      {isLogged() && (
+      {isLogged && (
         <div className="ml-auto flex items-center flex-row mr-10">
-          <div className="flex items-center justify-center bg-primary m-auto w-[48px] h-[48px] rounded-full mr-2">
+          <div className="flex items-center justify-center bg-primary m-auto w-[48px] h-[48px] rounded-full mr-2 text-grayIce">
             CE
           </div>
           <p className="text-xl text-primary">Carlos Eduardo</p>
         </div>
       )}
 
-      {!isLogged() && (
+      {!isLogged && (
         <div className="ml-auto mr-10">
           <Link
             href={routes.login}

@@ -20,7 +20,7 @@ const ShowBookComponent = ({ book }: Props) => {
               <BookIcon size={22} className="mr-2" />
               <h1 className="text-2xl font-bold">{book.title}</h1>
             </div>
-            {isLogged() && (
+            {isLogged && (
               <button className="btn bg-yellowTheme">
                 <span className="text-grayIce">Reservar</span>
               </button>

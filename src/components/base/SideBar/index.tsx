@@ -43,7 +43,7 @@ const SideBar = () => {
             </Link>
           </div>
         </div>
-        {isLogged() && (
+        {isLogged && (
           <button className="flex justify-start items-center flex-row gap-x-2 mt-auto mb-[60%]">
             <BookmarkIcon />
             <p>Sair</p>

@@ -25,19 +25,21 @@ export default function Home() {
             <div className="flex flex-row flex-wrap lg:gap-x-16 items-start">
               {group.books.map((book, indexBook) => (
                 <div className="flex flex-row pt-4" key={indexBook}>
-                  <div className="flex flex-col items-center justify-center max-w-[250px]">
-                    <Image
-                      src={`http://localhost:3000${book.image_url}`}
-                      width={160}
-                      height={200}
-                      alt={'book_image'}
-                      className="h-[230px] w-[160px] object-cover"
-                    />
-                    <p className="font-normal text-center max-w-[160px] break-words">
-                      {book.title}
-                    </p>
-                    <small className="font-thin">{book.available}</small>
-                  </div>
+                  <Link href={`${routes.books}/${book.id}`}>
+                    <div className="flex flex-col items-center justify-center max-w-[250px]">
+                      <Image
+                        src={`http://localhost:3000${book.image_url}`}
+                        width={160}
+                        height={200}
+                        alt={'book_image'}
+                        className="h-[230px] w-[160px] object-cover"
+                      />
+                      <p className="font-normal text-center max-w-[160px] break-words">
+                        {book.title}
+                      </p>
+                      <small className="font-thin">{book.available}</small>
+                    </div>
+                  </Link>
                 </div>
               ))}
             </div>
