@@ -1,9 +1,9 @@
+import EditCategory from '@/components/screens/Category/Edit'
 import { verifyTokenAdmin } from '@middlewares/verifyTokenAdmin'
 import { GetServerSidePropsContext } from 'next'
-import CreateCategory from '@/components/screens/Category/Create'
 
-const NovaCategoria = () => <CreateCategory />
+const EditarCategory = () => <EditCategory />
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => verifyTokenAdmin(ctx)
 
-export default NovaCategoria
+export default EditarCategory

@@ -2,12 +2,14 @@ type DataApi = {
   id: number
   name: string
   description: string
+  active: boolean
 }
 
 export interface ICategoriesFactory {
   id: number
   name: string
   description: string
+  active: boolean
 }
 
 export default class CategoriesFactory {
@@ -18,6 +20,7 @@ export default class CategoriesFactory {
           id: item.id,
           name: item.name,
           description: item.description,
+          active: item.active,
         }
       }) || []
     )

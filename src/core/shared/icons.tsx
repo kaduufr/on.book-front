@@ -9,7 +9,9 @@ import { GiBlackBook as BookIcon } from 'react-icons/gi'
 import { FaArrowLeft as ArrowLeftIcon } from 'react-icons/fa'
 import { HiOutlineChevronRight as ChevronRightIcon } from 'react-icons/hi'
 import { PiWarning as WarningIcon } from 'react-icons/pi'
-import {IoIosClose as CloseIcon} from 'react-icons/io'
+import { IoIosClose as CloseIcon } from 'react-icons/io'
+import { CgLogOff as LogoffIcon } from 'react-icons/cg'
+import { BiHomeSmile as HomeSmileIcon, BiUser as UserIcon } from 'react-icons/bi'
 
 export {
   HomeIcon,
@@ -21,5 +23,8 @@ export {
   BookIcon,
   HalfBookIcon,
   WarningIcon,
-  CloseIcon
+  CloseIcon,
+  HomeSmileIcon,
+  UserIcon,
+  LogoffIcon,
 }

@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from '@redux/hooks'
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import CookieProvider from '@providers/CookieProvider'
 import { COOKIE_APP } from '@data/constants'
 import { decodeToken } from '@helpers/decodeToken'
-import {IUser, logoff, setUser} from '@features/userSlice'
+import { IUser, logoff, setUser, UserTypeEnum } from '@features/userSlice'
 import { RootState } from '@redux/store'
 import { createSelector } from '@reduxjs/toolkit'
 
@@ -50,6 +50,7 @@ export default function useUserLogged() {
     email,
     document,
     user_id: id,
-    logoff: () => dispatch(logoff())
+    isAdmin: type === UserTypeEnum.admin,
+    logoff: () => dispatch(logoff()),
   }
 }

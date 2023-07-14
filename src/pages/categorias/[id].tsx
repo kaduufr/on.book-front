@@ -1,9 +1,9 @@
 import { verifyTokenAdmin } from '@middlewares/verifyTokenAdmin'
 import { GetServerSidePropsContext } from 'next'
-import CreateCategory from '@/components/screens/Category/Create'
+import ShowCategory from '@/components/screens/Category/ShowCategory'
 
-const NovaCategoria = () => <CreateCategory />
+const MostrarCategoria = () => <ShowCategory />
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => verifyTokenAdmin(ctx)
 
-export default NovaCategoria
+export default MostrarCategoria
