@@ -4,23 +4,27 @@ import useFetchCategories from '@hooks/useFetchCategories'
 import Link from 'next/link'
 import routes from '@data/routes'
 import useUserLogged from '@hooks/useUserLogged'
-import {useRouter} from "next/router";
-import UserProvider from "@providers/UserProvider";
+import { useRouter } from 'next/router'
+import CookieProvider from '@providers/CookieProvider'
+import { COOKIE_APP } from '@data/constants'
+import { UserTypeEnum } from '@features/userSlice'
 
 const SideBar = () => {
   const { categories } = useFetchCategories()
-  const { isLogged, logoff } = useUserLogged()
-  const {push} = useRouter()
+  const { isLogged, logoff, type } = useUserLogged()
+  const { push } = useRouter()
 
   function handleLogout(evt: MouseEvent) {
     evt.preventDefault()
-    UserProvider.logout()
-    push(routes.home)
+    CookieProvider.destroyCookie({ cookieName: COOKIE_APP, ctx: null })
     logoff()
+    push(routes.home)
   }
 
+  const isAdmin = type === UserTypeEnum.admin
+
   return (
-    <div className="flex flex-col w-[260px] pt-6  gap-y-5">
+    <div className="flex flex-col w-[260px] h-screen fixed pt-6  gap-y-5">
       <div className={`text-2xl font-bold text-center pb-8 text-primary`}>On.Book</div>
       <div className="flex flex-col px-8 text-primary gap-y-2 h-full">
         <Link href={routes.home}>
@@ -30,6 +34,14 @@ const SideBar = () => {
           </button>
         </Link>
         <div className="w-full flex flex-col gap-y-3">
+          {isLogged && isAdmin && (
+            <Link href={routes.books}>
+              <button className="flex justify-start items-center flex-row gap-x-2 hover:underline hover:font-bold hover:text-[16px] transition-all">
+                <BookmarkIcon />
+                <p>Livros</p>
+              </button>
+            </Link>
+          )}
           <div className="flex flex-row items-center gap-x-2">
             <BookmarkIcon />
             <p className="font-normal">Categorias</p>
@@ -58,10 +70,13 @@ const SideBar = () => {
             <Link href={routes.profile}>
               <button className="flex justify-start items-center flex-row gap-x-2 hover:underline hover:font-bold hover:text-[16px] transition-all">
                 <BookmarkIcon />
-                <p>Meus Perfil</p>
+                <p>Meu Perfil</p>
               </button>
             </Link>
-            <button className="flex justify-start items-center flex-row gap-x-2 " onClick={handleLogout}>
+            <button
+              className="flex justify-start items-center flex-row gap-x-2 "
+              onClick={handleLogout}
+            >
               <BookmarkIcon />
               <p>Sair</p>
             </button>

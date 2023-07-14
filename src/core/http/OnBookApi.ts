@@ -36,4 +36,8 @@ export default class OnBookApi {
   ): Promise<AxiosResponse<R>> {
     return api.put<R>(url, data, config)
   }
+
+  static delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    return api.delete<T>(url, config)
+  }
 }

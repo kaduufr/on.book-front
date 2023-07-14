@@ -9,6 +9,7 @@ import { GiBlackBook as BookIcon } from 'react-icons/gi'
 import { FaArrowLeft as ArrowLeftIcon } from 'react-icons/fa'
 import { HiOutlineChevronRight as ChevronRightIcon } from 'react-icons/hi'
 import { PiWarning as WarningIcon } from 'react-icons/pi'
+import {IoIosClose as CloseIcon} from 'react-icons/io'
 
 export {
   HomeIcon,
@@ -20,4 +21,5 @@ export {
   BookIcon,
   HalfBookIcon,
   WarningIcon,
+  CloseIcon
 }

@@ -25,4 +25,8 @@ export default class UserService {
       user: data,
     }).then((response) => LoginFactory.builder(response.data))
   }
+
+  static getBooksBorrowed() {
+    return OnBookApi.get('/livros-emprestados')
+  }
 }

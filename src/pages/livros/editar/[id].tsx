@@ -1,9 +1,9 @@
 import { GetServerSidePropsContext } from 'next'
-import CreateBooks from '@/components/screens/Book/Create'
 import { verifyTokenAdmin } from '@middlewares/verifyTokenAdmin'
+import EditBook from '@/components/screens/Book/Edit'
 
-const CadastrarLivros = () => <CreateBooks />
+const EditarLivro = () => <EditBook />
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => verifyTokenAdmin(ctx)
 
-export default CadastrarLivros
+export default EditarLivro

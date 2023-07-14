@@ -1,18 +1,24 @@
 import { createSlice, Draft, PayloadAction } from '@reduxjs/toolkit'
 
-enum UserTypeEnum {
+export enum UserTypeEnum {
   user = 'user',
   admin = 'admin',
 }
 
-interface IUser {
+export interface IUser {
   name: string
   type?: UserTypeEnum
+  email?: string
+  document?: string
+  id?: number
 }
 
 const initialState: IUser = {
   name: '',
   type: undefined,
+  email: undefined,
+  document: undefined,
+  id: undefined,
 }
 
 const userSlice = createSlice({
