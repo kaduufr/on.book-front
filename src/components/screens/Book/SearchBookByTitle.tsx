@@ -1,22 +1,48 @@
-import { memo, useEffect, useState } from 'react'
-import WrapperContent from '@/components/widgets/WrapperContent'
-import useFetchAllBooks from '@hooks/useFetchAllBooks'
-import Image from 'next/image'
-import { CloseIcon } from '@shared/icons'
-import Swal from 'sweetalert2'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import BookService from '@services/BookService'
 import IBook from '@interfaces/IBook'
+import Swal from 'sweetalert2'
+import WrapperContent from '@/components/widgets/WrapperContent'
 import Link from 'next/link'
+import Image from 'next/image'
+import { CloseIcon, WarningIcon } from '@shared/icons'
+import Loading from '@/components/widgets/Loading'
 import useUserLogged from '@hooks/useUserLogged'
 
-const BooksIndex = () => {
-  const { data: bookList } = useFetchAllBooks()
+const SearchBookByTitle = () => {
+  const { query, back, replace } = useRouter()
+  const { title } = query as { title: string }
   const [books, setBooks] = useState<IBook[]>([])
-  const { isLogged, isAdmin } = useUserLogged()
+  const [total, setTotal] = useState<number>(0)
+  const [alreadyLoaded, setAlreadyLoaded] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
+  const { isAdmin, isLogged } = useUserLogged()
 
   useEffect(() => {
-    if (bookList) setBooks(bookList)
-  }, [bookList])
+    if (title) {
+      setLoading(true)
+      BookService.getBooksByTitle(title)
+        .then((data) => {
+          setBooks(data.books)
+        })
+        .catch((err) => {
+          console.log(err)
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Erro ao carregar livros, tente novamente mais tarde.',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+          }).then(() => {
+            back()
+          })
+        })
+        .finally(() => {
+          setLoading(false)
+          setAlreadyLoaded(true)
+        })
+    }
+  }, [title])
 
   function handleDeleteBook(id: number) {
     Swal.fire({
@@ -41,21 +67,34 @@ const BooksIndex = () => {
     })
   }
 
+  if (!title) {
+    replace('/livros')
+    return <div></div>
+  }
+
+  if (!alreadyLoaded && loading) {
+    return <Loading />
+  }
+
+  if (books.length === 0 && alreadyLoaded) {
+    return (
+      <WrapperContent>
+        <h1 className="text-2xl">Pesquisa: {title ?? ''} </h1>
+        <div>
+          <div className="alert bg-warn mt-6">
+            <WarningIcon fill="white" size={22} />
+            <span className="text-grayIce">Nenhum livro encontrado!</span>
+          </div>
+        </div>
+      </WrapperContent>
+    )
+  }
+
   return (
     <WrapperContent>
-      <div className="flex flex-row items-center justify-between w-full mb-4">
-        <h1 className="text-2xl font-bold">Books</h1>
+      <h1 className="text-2xl font-bold">Pesquisa: {title ?? ''} </h1>
 
-        {isLogged && isAdmin && (
-          <Link href={`/livros/cadastrar`}>
-            <button className="py-2 px-4 rounded-lg bg-primary hover:bg-primary hover:brightness-95 text-grayIce">
-              Cadastrar novo livro
-            </button>
-          </Link>
-        )}
-      </div>
-
-      <div className="flex flex-row flex-wrap w-full">
+      <div className="flex flex-row flex-wrap w-full mt-4">
         {books?.map((book, index) => (
           <div key={index} className="flex flex-row w-1/3 p-2">
             <Link href={`/livros/${book.id}`}>
@@ -101,4 +140,4 @@ const BooksIndex = () => {
   )
 }
 
-export default memo(BooksIndex)
+export default SearchBookByTitle

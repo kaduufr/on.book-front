@@ -3,6 +3,7 @@ import BooksFactory, { IBookGroup } from '@factories/BooksFactory'
 import ShowBooksFactory, { IShowBooksFactory } from '@factories/ShowBooksFactory'
 import { BooksBorrowedFactory, IBookBorrowFactory } from '@factories/BooksBorrowedFactory'
 import { AxiosResponse } from 'axios'
+import { BorrowedByBookFactory, IBorrowedByBookFactory } from '@factories/BorrowByBookFactory'
 
 export type BorrowBookType = {
   user_id: number
@@ -35,7 +36,7 @@ export default class BookService {
 
   static getBooksBorrowed(): Promise<IBookBorrowFactory[]> {
     return OnBookApi.get('/livros-emprestados').then((response) =>
-      BooksBorrowedFactory.builder(response.data)
+      BooksBorrowedFactory.builder(response.data.data)
     )
   }
 
@@ -61,5 +62,21 @@ export default class BookService {
         'Content-Type': 'multipart/form-data',
       },
     })
+  }
+
+  static getBooksByTitle(title: string): Promise<IShowBooksFactory> {
+    return OnBookApi.get(`/books/search?title=${title}`).then((response) =>
+      ShowBooksFactory.builder(response.data)
+    )
+  }
+
+  static getBorrowByBookId(id: number): Promise<IBorrowedByBookFactory[]> {
+    return OnBookApi.get(`/livros-emprestados/${id}`).then((response) =>
+      BorrowedByBookFactory.builder(response.data.data)
+    )
+  }
+
+  static returnBook(id: number): Promise<AxiosResponse> {
+    return OnBookApi.put(`/livros-emprestados/${id}`)
   }
 }

@@ -11,6 +11,7 @@ import { UserTypeEnum } from '@features/userSlice'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import routes from '@data/routes'
+import BorrowedBooksComponent from '@/components/widgets/BorrowedBooksComponent'
 
 type Props = {
   book: IBook
@@ -81,85 +82,82 @@ const ShowBookComponent = ({ book }: Props) => {
 
   return (
     <WrapperContent>
-      <div className="flex flex-row items-start">
-        <div className="flex flex-col w-full">
-          <div className="flex flex-row justify-between">
-            <div className="flex flex-row items-center">
-              <BookIcon size={22} className="mr-2" />
-              <h1 className="text-2xl font-bold">{book.title}</h1>
-            </div>
-            {isLogged && !isAdmin && (
-              <button className="btn bg-yellowTheme" onClick={handleReserveBook}>
-                <span className="text-grayIce">Reservar</span>
-              </button>
-            )}
-            {isLogged && isAdmin && (
-              <div className="flex flex-row items-center">
-                <Link href={`/livros/editar/${book.id}`}>
-                  <button className="btn btn-success">
-                    <span className="text-grayIce">Editar</span>
-                  </button>
-                </Link>
-                <button className="btn btn-error ml-2" onClick={() => handleDeleteBook(book.id)}>
-                  <span className="text-grayIce">Excluir</span>
-                </button>
-              </div>
-            )}
+      <div className="flex flex-col w-full">
+        <div className="flex flex-row justify-between">
+          <div className="flex flex-row items-center">
+            <BookIcon size={22} className="mr-2" />
+            <h1 className="text-2xl font-bold">{book.title}</h1>
           </div>
-          {loading && <Loading />}
-          <div className="flex flex-col md:flex-row pt-8">
-            <div className="">
-              <Image
-                src={`http://localhost:3000${book.image_url}`}
-                alt="bookPicture"
-                height="1000"
-                width="800"
-                className="w-auto min-w-[260px] max-h-[500]"
-              />
+          {isLogged && !isAdmin && (
+            <button className="btn bg-yellowTheme" onClick={handleReserveBook}>
+              <span className="text-grayIce">Reservar</span>
+            </button>
+          )}
+          {isLogged && isAdmin && (
+            <div className="flex flex-row items-center">
+              <Link href={`/livros/editar/${book.id}`}>
+                <button className="btn btn-success">
+                  <span className="text-grayIce">Editar</span>
+                </button>
+              </Link>
+              <button className="btn btn-error ml-2" onClick={() => handleDeleteBook(book.id)}>
+                <span className="text-grayIce">Excluir</span>
+              </button>
             </div>
-            <div className="flex flex-col w-full mt-6 md:mt-0 ml-6">
-              <div className="w-full">
-                <p className="text-lg mb-1">
-                  <b>Autor / Autora:</b>
-                </p>
-                <p className="bg-gray-200 p-2 text-md rounded-xl w-max md:w-1/2">{book.author}</p>
-              </div>
-              <div className="w-full pt-2">
-                <p className="text-lg mb-1">
-                  <b>Categoria:</b>
-                </p>
-                <p className="bg-gray-200 p-2 text-md rounded-xl w-max md:w-1/2">
-                  {book.category_name}
-                </p>
-              </div>
-              <div className="w-full pt-2">
-                <p className="text-lg mb-1">
-                  <b>Ano de Publicação:</b>
-                </p>
-                <p className="bg-gray-200 p-2 text-md rounded-xl w-max md:w-1/2">
-                  {book.published_at}
-                </p>
-              </div>
-              <div className="w-full pt-2">
-                <p className="text-lg mb-1">
-                  <b>Descrição:</b>
-                </p>
-                <p className="bg-gray-200 p-2 text-md rounded-xl w-max md:w-1/2">
-                  {book.description}
-                </p>
-              </div>
-              <div className="w-full pt-2">
-                <p className="text-lg mb-1">
-                  <b>Status:</b>
-                </p>
-                <p className="bg-gray-200 p-2 text-md rounded-xl w-max md:w-1/2">
-                  {book.available}
-                </p>
-              </div>
+          )}
+        </div>
+        {loading && <Loading />}
+        <div className="flex flex-col md:flex-row pt-8">
+          <div className="">
+            <Image
+              src={`http://localhost:3000${book.image_url}`}
+              alt="bookPicture"
+              height="1000"
+              width="800"
+              className="w-auto min-w-[260px] max-h-[500]"
+            />
+          </div>
+          <div className="flex flex-col w-full mt-6 md:mt-0 ml-6">
+            <div className="w-full">
+              <p className="text-lg mb-1">
+                <b>Autor / Autora:</b>
+              </p>
+              <p className="bg-gray-200 p-2 text-md rounded-xl w-max md:w-1/2">{book.author}</p>
+            </div>
+            <div className="w-full pt-2">
+              <p className="text-lg mb-1">
+                <b>Categoria:</b>
+              </p>
+              <p className="bg-gray-200 p-2 text-md rounded-xl w-max md:w-1/2">
+                {book.category_name}
+              </p>
+            </div>
+            <div className="w-full pt-2">
+              <p className="text-lg mb-1">
+                <b>Ano de Publicação:</b>
+              </p>
+              <p className="bg-gray-200 p-2 text-md rounded-xl w-max md:w-1/2">
+                {book.published_at}
+              </p>
+            </div>
+            <div className="w-full pt-2">
+              <p className="text-lg mb-1">
+                <b>Descrição:</b>
+              </p>
+              <p className="bg-gray-200 p-2 text-md rounded-xl w-max md:w-1/2">
+                {book.description}
+              </p>
+            </div>
+            <div className="w-full pt-2">
+              <p className="text-lg mb-1">
+                <b>Status:</b>
+              </p>
+              <p className="bg-gray-200 p-2 text-md rounded-xl w-max md:w-1/2">{book.available}</p>
             </div>
           </div>
         </div>
       </div>
+      {isLogged && isAdmin && book.id && <BorrowedBooksComponent book_id={book.id} />}
     </WrapperContent>
   )
 }
