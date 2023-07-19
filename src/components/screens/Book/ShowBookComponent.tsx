@@ -12,6 +12,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import routes from '@data/routes'
 import BorrowedBooksComponent from '@/components/widgets/BorrowedBooksComponent'
+import { AxiosError } from 'axios'
 
 type Props = {
   book: IBook
@@ -30,6 +31,7 @@ const ShowBookComponent = ({ book }: Props) => {
   const { push } = useRouter()
 
   const handleReserveBook = async (evt: MouseEvent) => {
+    evt.preventDefault()
     const data: BorrowBookType = {
       book_id: book.id,
       user_id,
@@ -89,7 +91,11 @@ const ShowBookComponent = ({ book }: Props) => {
             <h1 className="text-2xl font-bold">{book.title}</h1>
           </div>
           {isLogged && !isAdmin && (
-            <button className="btn bg-yellowTheme" onClick={handleReserveBook}>
+            <button
+              className="btn bg-yellowTheme"
+              disabled={!book.canBeBorrowed}
+              onClick={handleReserveBook}
+            >
               <span className="text-grayIce">Reservar</span>
             </button>
           )}
@@ -140,6 +146,14 @@ const ShowBookComponent = ({ book }: Props) => {
                 {book.published_at}
               </p>
             </div>
+            {book.canBeBorrowed && (
+              <div className="w-full pt-2">
+                <p className="text-lg mb-1">
+                  <b>Seção:</b>
+                </p>
+                <p className="bg-gray-200 p-2 text-md rounded-xl w-max md:w-1/2">{book.section}</p>
+              </div>
+            )}
             <div className="w-full pt-2">
               <p className="text-lg mb-1">
                 <b>Descrição:</b>

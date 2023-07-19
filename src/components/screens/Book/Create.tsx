@@ -43,7 +43,6 @@ const CreateBooks = () => {
     defaultValues: {
       title: '',
       author: '',
-      category: '',
       published_at: '',
       description: '',
       quantity: 0,
@@ -83,7 +82,7 @@ const CreateBooks = () => {
     formData.append('publishYear', data.published_at)
     formData.append('description', data.description)
     formData.append('quantity', String(data.quantity))
-    formData.append('image', image)
+    formData.append('image', image!)
     formData.append('section', data.section)
 
     BookService.createBook(formData)
@@ -101,7 +100,7 @@ const CreateBooks = () => {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: error.response?.data?.message || 'Erro ao cadastrar livro',
+          text: 'Erro ao cadastrar livro',
         })
       )
   }

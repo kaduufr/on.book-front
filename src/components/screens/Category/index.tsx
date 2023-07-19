@@ -9,15 +9,15 @@ import Swal from 'sweetalert2'
 import CategoryService from '@services/CategoryService'
 
 const colors = [
-  '#a5dae6',
-  '#fee3b8',
-  '#bde4e5',
-  '#a0d995',
-  '#b9b2db',
-  '#ffaba8',
-  '#a2edce',
-  '#d3bead',
-  '#ee8fab',
+  'bg-[#a5dae6]',
+  'bg-[#fee3b8]',
+  'bg-[#bde4e5]',
+  'bg-[#a0d995]',
+  'bg-[#b9b2db]',
+  'bg-[#ffaba8]',
+  'bg-[#a2edce]',
+  'bg-[#d3bead]',
+  'bg-[#ee8fab]',
 ]
 
 const CategoriesScreen = () => {
@@ -85,7 +85,7 @@ const CategoriesScreen = () => {
           }
 
           return (
-            <div key={category.id} className="relative">
+            <div key={category.id} className={`relative`}>
               {isLogged && isAdmin && (
                 <div className="flex flex-row items-center top-1 right-2 absolute z-20">
                   {!category.active && <small>Inativa</small>}
@@ -106,7 +106,7 @@ const CategoriesScreen = () => {
               <Link href={`/livros/categorias/${category.id}`}>
                 <div
                   key={category.id}
-                  className={`w-[260px] h-[140px] rounded-xl text-primary font-bold flex justify-center items-center bg-[${bgColorRandom}] ${
+                  className={`text-primary w-[260px] h-[140px] rounded-xl ${bgColorRandom} font-bold flex justify-center items-center ${
                     !category.active && '!bg-gray-300'
                   }`}
                 >

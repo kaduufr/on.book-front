@@ -50,6 +50,7 @@ export default class BooksFactory {
           published_at: book?.published_at ?? '',
           category_id: book.category_id,
           category_name: book.category_name,
+          canBeBorrowed: book.available,
         })
       }
     })

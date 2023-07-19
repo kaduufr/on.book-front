@@ -11,4 +11,5 @@ export default interface IBook {
   category_id: number
   category_name: string
   published_at?: string
+  canBeBorrowed?: boolean
 }

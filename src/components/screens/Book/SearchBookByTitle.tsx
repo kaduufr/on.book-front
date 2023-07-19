@@ -11,10 +11,10 @@ import Loading from '@/components/widgets/Loading'
 import useUserLogged from '@hooks/useUserLogged'
 
 const SearchBookByTitle = () => {
-  const { query, back, replace } = useRouter()
-  const { title } = query as { title: string }
   const [books, setBooks] = useState<IBook[]>([])
   const [total, setTotal] = useState<number>(0)
+  const { query, back, replace } = useRouter()
+  const { title } = query as { title: string }
   const [alreadyLoaded, setAlreadyLoaded] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const { isAdmin, isLogged } = useUserLogged()
@@ -65,11 +65,6 @@ const SearchBookByTitle = () => {
           })
       }
     })
-  }
-
-  if (!title) {
-    replace('/livros')
-    return <div></div>
   }
 
   if (!alreadyLoaded && loading) {

@@ -39,6 +39,13 @@ const BorrowedBooksComponent = ({ book_id }: { book_id: number }) => {
       if (result.isConfirmed) {
         BookService.returnBook(borrow_id)
           .then(() => {
+            Swal.fire({
+              title: 'Sucesso!',
+              text: 'Exemplar devolvido com sucesso!',
+              icon: 'success',
+              confirmButtonText: 'Ok',
+            })
+
             setBorrows(borrows.filter((borrow) => borrow.id !== borrow_id))
           })
           .catch((error) => {
